@@ -1,0 +1,9 @@
+name: Creating first actions
+on:  push
+
+jobs:
+  first_actions:
+    runs-on:  ubuntu-latest
+    steps:
+    - name: Print Hello
+      run: echo "Hello,World !"
