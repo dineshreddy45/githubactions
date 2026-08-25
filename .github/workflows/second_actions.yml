@@ -1,0 +1,17 @@
+name: docker image deployement on to a container
+on:
+  push:
+    branches:
+    - main
+env:
+  DOCKER_USERNAME:  ${{ vars.DOCKER_USERNAME }}
+jobs:
+  Container-building:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker login
+      run: docker login -u ${{ env.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+    - name: Image Pull
+      run:  docker pull ${{ vars.DOCKER_USERNAME }}/apache2
+    - name: Running the container
+      run:  docker run -d -p 8080:80 ${{ vars.DOCKER_USERNAME }}/apache2:latest
